@@ -43,12 +43,13 @@ $(TMP_DIR)/apktool-if: $(ZIP_FILE) $(APKTOOL_IF_RESULT_FILE)/6.apk | $(TMP_DIR)
 	@echo install framework-miui-res.apk
 	$(APKTOOL) if $(SYSOUT_DIR)/framework/framework-miui-res.apk
 	$(APKTOOL) if $(SYSOUT_DIR)/framework/framework-res.apk miui
-	$(UNZIP) $(ZIP_FILE) "system/framework/*.apk" -d $(TMP_DIR)
+	$(hide) for res_file in `find system/framework -name "*.apk"`; do\
+		$(UNZIP) $(ZIP_FILE) $(res_file) -d $(TMP_DIR); \
+	done
 	$(hide) for res_file in `find $(TMP_DIR)/system/framework/ -name "*.apk"`; do\
 		echo install $$res_file ; \
 		$(APKTOOL) if $$res_file; \
 	done
-	$(hide) rm -r $(TMP_DIR)/system/framework/*.apk
 	@echo "<<< install framework resources completed!"
 	@touch $@
 
