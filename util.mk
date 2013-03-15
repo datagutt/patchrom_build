@@ -50,6 +50,8 @@ $(TMP_DIR)/apktool-if: $(ZIP_FILE) $(APKTOOL_IF_RESULT_FILE)/6.apk | $(TMP_DIR)
 		echo install $$res_file ; \
 		$(APKTOOL) if $$res_file; \
 	done
+	$(hide) rm -r $(TMP_DIR)/system/framework/*.apk
+	mkdir -p $(TMP_DIR)/framework2/smali/miui/miui/
 	@echo "<<< install framework resources completed!"
 	@touch $@
 

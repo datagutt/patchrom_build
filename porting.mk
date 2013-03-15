@@ -213,6 +213,7 @@ $(TMP_DIR)/framework-miui-res.apk: $(TMP_DIR)/framework-res.apk $(OUT_JAR_PATH)/
 	$(hide) for dir in `ls -d $(OVERLAY_MIUI_RES_DIR)/values*`; do\
 		$(MERGE_RES) $$dir $(TMP_DIR)/framework-miui-res/res/`basename $$dir` $(MERGE_RULE); \
 	done
+	@sed -e s/compressioninfo: false/compressioninfo:/ framework-miui-res/apktool.yml > framework-miui-res/apktool.yml
 	@echo "  - 2" >> $(TMP_DIR)/framework-miui-res/apktool.yml
 	@echo "  - 3" >> $(TMP_DIR)/framework-miui-res/apktool.yml
 	@echo "  - 4" >> $(TMP_DIR)/framework-miui-res/apktool.yml
